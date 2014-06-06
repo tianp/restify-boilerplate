@@ -13,6 +13,10 @@ npm run {environment}
 
 The difference is the NODE_ENV parameter, it will set based on ```environment``` parameters
 
+## Features
+
+* Password encryption using bcrypt
+
 ## Package.json
 
 To modify the port, you can modify the ```package.json```, on ```scripts.development``` or ```scripts.production```
@@ -29,6 +33,7 @@ Forever watch all the directories of the project, and will auto restarts if chan
 * underscore
 * forever
 * moment
+* bcrypt
 * require-directory
 
 # License
