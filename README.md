@@ -13,9 +13,13 @@ npm run {environment}
 
 The difference is the NODE_ENV parameter, it will set based on ```environment``` parameters
 
+## Package.json
 
 To modify the port, you can modify the ```package.json```, on ```scripts.development``` or ```scripts.production```
 
+## Forever Watch / Auto Restarts
+
+Forever watch all the directories of the project, and will auto restarts if changes happens. So you don't need to do manual restarts each time you modify some codes.
 
 ## Modules Used
 
