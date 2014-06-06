@@ -16,6 +16,17 @@ The difference is the NODE_ENV parameter, it will set based on ```environment```
 
 To modify the port, you can modify the ```package.json```, on ```scripts.development``` or ```scripts.production```
 
+
+## Modules Used
+
+* node-restify
+* mongoskin
+* async
+* underscore
+* forever
+* moment
+* require-directory
+
 # License
 
 Copyright (c) 2014 Tian Permana
