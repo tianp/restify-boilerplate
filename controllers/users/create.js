@@ -3,6 +3,7 @@
   var _ = require('underscore'),
     async = require('async'),
     moment = require('moment'),
+    bcrypt = require('bcrypt'),
     Models = require('./../../models')
 
   module.exports = function( params, done ){
@@ -14,7 +15,7 @@
         next( null, params )
       },
 
-      checkParams,
+      encryptPassword,
 
       createNewUser
 
@@ -32,10 +33,44 @@
     })
   }
 
-  function checkParams( params, done ){
+  function encryptPassword( params, done ){
 
-    done( null, params )
+    /*
+    * This function will encrypt a string into hashed password
+    * First, it will generate a salt
+    * Then it will hash the string based on the salt
+    * It will return the salt and hashed string
+    */
+
+    // generate salt
+    bcrypt.genSalt( 10, function ( error, salt ){
+
+      if( error ){
+
+        done( error )
+
+        return
+      }
+
+      // hash the inputted password
+      bcrypt.hash( params.password, salt, function ( error, hashedPassword ){
+
+        if( error ){
+
+          done( error )
+
+          return
+        }
+
+        params.password = hashedPassword
+
+        done( null, params )
+
+      })
+    })
   }
+
+
 
   function createNewUser( params, done ){
 
