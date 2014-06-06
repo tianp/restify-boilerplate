@@ -1,6 +1,7 @@
 (function(){
 
-  var restify = require('restify')
+  var restify = require('restify'),
+    Routes = require('./routes')
 
   var server = restify.createServer({
     name: 'restify-boilerplate',
@@ -9,6 +10,12 @@
 
   server.use( restify.bodyParser() )
   server.use( restify.queryParser() )
+
+  server.get( '/users', Routes.users.list )
+  server.post( '/users', Routes.users.create )
+  server.get( '/users/:id', Routes.users.detail )
+  server.put( '/users/:id', Routes.users.udpate )
+  server.del( '/users/:id', Routes.users.delete )
 
   var port = parseInt( process.argv[2] )
 
