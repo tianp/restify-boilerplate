@@ -40,6 +40,7 @@
     * First, it will generate a salt
     * Then it will hash the string based on the salt
     * It will return the salt and hashed string
+    * We don't need to record the salt on database
     */
 
     // generate salt
@@ -69,8 +70,6 @@
       })
     })
   }
-
-
 
   function createNewUser( params, done ){
 
