@@ -1,10 +1,9 @@
 (function(){
 
   var mongo = require('mongoskin'),
-    Server = mongo.Server,
-    config = require('./../config')
+    Server = mongo.Server
 
-  var connection = new mongo.Db( config.mongo.name, new Server( config.mongo.host, 27017), { native_parser: true, w: 1 } )
+  var connection = new mongo.Db( "dbName", new Server( "mongoHost", 27017), { native_parser: true, w: 1 } )
 
   console.log('Trying to connect to database' )
 

@@ -1,0 +1,12 @@
+{
+  "apps" : [{
+    "name": "restify-boilerplate",
+    "script": "src/server.js",
+    "exec_mode": "cluster_mode",
+    "env": {
+      "port" : 9001,
+      "NODE_ENV": "development",
+      "MONGO_CONNECTION_STRING": "mongodb://127.0.0.1:27017/restify-boilerplate"
+    }
+  }]
+}

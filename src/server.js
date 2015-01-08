@@ -5,7 +5,7 @@
 
   var server = restify.createServer({
     name: 'restify-boilerplate',
-    version: '0.0.1'
+    version: '0.1.0'
   })
 
   server.use( restify.bodyParser() )
@@ -14,12 +14,10 @@
   server.get( '/users', Routes.users.list )
   server.post( '/users', Routes.users.create )
   server.get( '/users/:id', Routes.users.detail )
-  server.put( '/users/:id', Routes.users.udpate )
+  server.put( '/users/:id', Routes.users.update )
   server.del( '/users/:id', Routes.users.delete )
 
-  var port = parseInt( process.argv[2] )
-
-  server.listen( port, function() {
+  server.listen( process.env.port, function() {
 
     var startMessage = process.env.NODE_ENV + ' environment ' + server.name + ' is listening at ' + server.url
 
