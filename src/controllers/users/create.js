@@ -2,7 +2,6 @@
 
   var _ = require('underscore'),
     async = require('async'),
-    moment = require('moment'),
     bcrypt = require('bcrypt'),
     Models = require('./../../models')
 
@@ -73,9 +72,10 @@
 
   function createNewUser( params, done ){
 
-    var Users = new Models.users()
+    var Users = new Models.users( params )
 
-    Users.create( params, done )
+    Users.save( done )
+
   }
 
 })()

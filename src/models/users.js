@@ -1,43 +1,59 @@
 (function(){
 
-  var _ = require('underscore'),
-    moment = require('moment'),
-    db = require('./../libs/connection').db
+  var assert = require('assert'),
+    mongoose = require('./../adapters/mongoose'),
+    Components = require('./../components'),
+    Schema = mongoose.Schema
 
-  var Users = function() {
-
-    db.bind( 'users' )
-
-    _.extend( this, db.users )
-  }
-
-  Users.prototype.create = function( params, done ){
-
-    var defaults = {
-      dateSubmitted: {
-        timestamp: moment().unix(),
-        iso: moment().toISOString()
-      }
+  var userSchema = new Schema({
+    id: {
+      type: String,
+      required: true,
+      default: Components.utils.generateId()
+    },
+    firstName: {
+      type: String,
+      required: true
+    },
+    lastName: {
+      type: String,
+      required: true
+    },
+    createdAt: {
+      type: Schema.Types.Mixed,
+      default: Components.utils.generateDate()
     }
+  })
 
-    var user = _.defaults( params, defaults )
+  userSchema.statics.findById = function( id, options, done ){
 
-    var options = { w: 1 } // write concern
+    var query = { 'id': id },
+      select = '-_id -__v'
 
-    this.insert( user, options, function( error, result ) {
+    var cursor = this.findOne( query )
 
-      if( error ){
+    cursor.select( select )
 
-        done( error ) // something happens
+    cursor.exec(function( error, user ){
 
-        return
-      }
+      assert.ifError( error )
 
-      done( null, result[0] ) // return back the recorded user
+      done( null, user )
 
     })
+
   }
 
-  module.exports = Users
+  userSchema.pre( 'save', function( next ){
+
+    this.updatedAt = Components.utils.generateDate()
+
+    next()
+
+  })
+
+  var users = mongoose.model( 'user', userSchema )
+
+  module.exports = users
 
 })()
