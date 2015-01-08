@@ -10,21 +10,26 @@ To run this boilerplate, you need to install PM2 https://github.com/Unitech/pm2 
 ## Features
 
 * Password encryption using bcrypt
+* Generate UUID based identifier
 
 ## Configuration
 
 To modify the port, you can modify the ```processes.json```
 
+## Adapters
+
+* Mongoose
+
 ## Modules Used
 
 * node-restify
-* mongoskin
+* mongoose
 * async
 * underscore
-* forever
 * moment
 * bcrypt
 * require-directory
+* node-uuid
 
 # MIT License
 
